@@ -1,19 +1,30 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 function App() {
-  
+
   const [nome, setNome] = useState();
   const [email, setEmail] = useState('');
   const [idade, setIdade] = useState('');
 
   const [input, setInput] = useState('');
   const [nomes, setNomes] = useState([
-    'Lucca',
-    'Otávio',
-    'Pedro'
+   'teste',
+    'teste2'
   ]);
 
+  useEffect(() => {
+    const nomesStorage = localStorage.getItem('@nomes');
+  
+  if(nomesStorage){
+    setNomes(JSON.parse(nomesStorage))
+  }
+  }, []);
+
   const [user, setUser] = useState({});
+
+  useEffect(() => {
+    localStorage.setItem('@nomes', JSON.stringify(nomes))
+  }, [nomes]);
 
   function handleRegister(e) {
     // bloqueia a atualização automática da página
@@ -40,7 +51,7 @@ function App() {
         <input placeholder='Digite seu Nome'
           value={nome}
           onChange={(e) => setInput(e.target.value)}
-        
+
         /><br />
 
         <label>Email:</label><br />
@@ -62,14 +73,14 @@ function App() {
         <span>Bem vindo: {user.nome}</span> <br />
         <span>Idade: {user.idade}</span> <br />
         <span>Email: {user.email}</span> <br />
-      
-      <ul>
-      <h1>Nomes Salvos</h1>
-      {nomes.map( nomes => (
-        <li key={nomes}>{nomes}</li>
-      ))}
-      </ul>
-        
+
+        <ul>
+          <h1>Nomes Salvos</h1>
+          {nomes.map(nomes => (
+            <li key={nomes}>{nomes}</li>
+          ))}
+        </ul>
+
       </div>
     </div>
   );
