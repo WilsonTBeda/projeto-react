@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 
+
 function App() {
 
   const [nome, setNome] = useState();
@@ -83,7 +84,40 @@ function App() {
 
       </div>
     </div>
+
+    
   );
 }
+
+function App2() {
+
+  const [nutri, setNutri] = useState([])
+
+  useEffect(() => {
+
+      function loadApi(){
+          let url = '// https://sujeitoprogramador.com/rn-api/?api=posts';
+          
+          
+          fetch(url)
+          .then((r) => r.json())
+          .then((json) => {
+              console.log(json);
+          })
+      }
+
+      loadApi();
+
+  }, []);
+
+  return (
+
+      < div >
+          <h1> teste </h1>
+      </div >
+
+  );
+}
+
 
 export default App;
